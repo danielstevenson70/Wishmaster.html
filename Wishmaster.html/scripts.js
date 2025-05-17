@@ -3,19 +3,43 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM Content Loaded');
 
-    const generateListButton = document.querySelector('#generateList');
-    const myList = document.querySelector('#myList');
 
-    generateListButton.addEventListener('click', function() {
-        const inputItems = document.querySelectorAll('input');
-        
+var generateWishResults = document.querySelector('#generateWishResults');
+var myWishList = document.querySelector('#myWishList');
+generateWishResults.addEventListener('click', function() {
+    console.log('Wish List Button Clicked');
+    var inputItems = document.querySelectorAll('input');
 
+    function createWishList() {
+        var listElement = document.createElement('ul');
         inputItems.forEach(function (inputItem) {
-            const listItem = document.createElement('li');
+            var listItem = document.createElement('li');
             listItem.innerText = inputItem.value;
             listElement.appendChild(listItem);
         });
+        myWishList.appendChild(listElement);
 
-        myList.appendChild(listElement);
+    }
+    function generateWishResults() {
+        var wishList = [];
+        inputItems.forEach(function (inputItem) {
+            if (inputItem.value) {
+                wishList.push(inputItem.value);
+            }
+        });
+        return wishList;
+    }
+    var wishList = generateWishResults();
+    console.log('Wish List:', wishList);
+
+    function resultsWishList() {
+            var listElement = document.createElement('ul');
+            wishList.forEach(function (wishItem) {
+                var listItem = document.createElement('li');
+                listItem.innerText = wishItem;
+                listElement.appendChild(listItem);
+            });
+            myWishList.appendChild(listElement);
+        }
     });
 });
